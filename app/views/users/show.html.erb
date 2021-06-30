@@ -15,7 +15,7 @@
         <div class="columns is-centered">
             <div class="column is-4">
                 <figure class="image is-128x128" style="margin-left: auto; margin-right:auto">
-                    <%= attachment_image_tag @user, :profile_image, fallback: "No_image_available.svg", class: "profile-image is-rounded" %>
+                    <%= attachment_image_tag @user, :profile_image, fallback: "No_image_available.svg", class: "profile-image is-rounded user-image-profile" %>
                 </figure>
             </div>
             <div class="column is-8">
@@ -48,4 +48,55 @@
   </div>
 </section>
 
-レジピの情報は後で実装
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
+      <%= @user.recipes.each do |recipe| %>
+        <div class="column is-4">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image">
+                        <figure class="image is-4by3">
+                            <%= link_to recipe_path(recipe) do%>
+                                <%= attachment_image_tag recipe, :image, fallback: "No_image_available.svg", class: "profile-image" %>
+                            <%end%>
+                        </figure>
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <%= link_to recipe_path(recipe), class: "panel-block" do%>
+                                <span class="panel-icon">
+                                    <i class="fas fa-book"></i>
+                                </span>
+                                このレジピを見る
+                            <% end%>
+                            <% if @user.id == current_user.id%>
+                                <%= link_to edit_recipe_path(recipe), class: "panel-block" do%>
+                                    <span class="panel-icon">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    このレジピを編集する
+                                <% end%>
+                                <%= link_to recipe_path(recipe), method: :delete, data: { confirm: "削除しますか？" }, class: "panel-block" do%>
+                                    <span class="panel-icon">
+                                        <i class="fas fa-trash"></i>
+                                    </span>
+                                    このレジピを削除する
+                                <% end%>
+                            <% end%>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <time>
+                        <%= recipe.updated_at.strftime("%Y-%m-%d %H:%M")%>更新
+                    </time>
+                </div>
+            </div>
+        </div>    
+      <% end %>
+    </div>
+  </div>
+</section>
