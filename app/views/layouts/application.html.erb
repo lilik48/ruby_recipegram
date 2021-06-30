@@ -36,6 +36,9 @@
 
       <% if user_signed_in? %>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
+            <div class="navbar-item">
+              <%= link_to "レジピ一覧", recipes_path, class:"navbar is-warning is-light"%>
+            </div>
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="field is-grouped">
@@ -51,6 +54,7 @@
         </div>      
       <% else %>
         <div id="navbarExampleTransparentExample" class="navbar-menu">
+          
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="field is-grouped">
