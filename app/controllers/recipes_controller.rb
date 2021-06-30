@@ -17,7 +17,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
     if @recipe.save
-      redirect_to recipe_path(@recipe)
+      redirect_to recipe_path(@recipe), notice:"投稿に成功しました。"
     else
       render :new
     end
@@ -35,7 +35,7 @@ class RecipesController < ApplicationController
     @recipe.update(recipe_params)
 
     if @recipe.save
-      redirect_to recipe_path(@recipe)
+      redirect_to recipe_path(@recipe), notice:"投稿に成功しました。"
     else
       render :edit
     end
